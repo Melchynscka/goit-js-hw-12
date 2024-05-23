@@ -6,7 +6,7 @@ const PER_PAGE = 15;
 export const fetchPhoto = async (query = 'cat', newsPage = 1) => {
    const params = new URLSearchParams ({
       key: API_KEY,
-      q: searchImage,
+      q: query,
       image_type: 'photo',
       orientation: 'horizontal',
       safesearch: 'true',
