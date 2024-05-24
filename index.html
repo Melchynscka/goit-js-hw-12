@@ -6,33 +6,21 @@
     <title>Gallery project</title>
     
     <script type="module" crossorigin src="/goit-js-hw-12/commonHelpers.js"></script>
-    <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-8c59ed88.js">
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-b0d10f48.js">
     <link rel="stylesheet" href="/goit-js-hw-12/assets/vendor-1cd1f9d9.css">
-    <link rel="stylesheet" href="/goit-js-hw-12/assets/index-54d0135e.css">
+    <link rel="stylesheet" href="/goit-js-hw-12/assets/index-aa9f930e.css">
   </head>
   <body>
     <main>
-      <section class="search-form">
-  <div class="container">
-    <form class="myForm">
-      <input
-        type="text"
-        id="textInput"
-        name="textInput"
-        required
-        placeholder="Search your image"
-      />
-      <button type="submit" class="search-btn">Search</button>
-    </form>
-  </div>
-</section>
+      <form class="search">
+  <input class="search-input" type="text" placeholder="Search images..." />
+  <button class="submit" type="submit">Search</button>
+</form>
 
       <section class="gallery-section">
-  <div class="container">
-    <ul class="gallery"></ul>
-    <button type="button" class="photo-btn is-hidden-btn">Load more</button>
-    <span class="loader position is-hidden"></span>
-  </div>
+  <ul class="gallery"></ul>
+  <button id="load-more" class="none" type="button">Load More</button>
+  <span class="loader position is-hidden"></span>
 </section>
 
     </main>
