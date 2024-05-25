@@ -1,17 +1,47 @@
 import axios from 'axios';
-const API_KEY = '43798487-cffd9f7a4f04e7c4b426bb2b8';
-const BASE_URL = 'https://pixabay.com/api/';
+import { MESSAGES, MESSAGES_BG_COLORS, showInfoMessage } from './helpers';
+import { fetchLoader } from './render-functions';
 
-export const fetchImages = async (searchValue = '', page = 1, perPage = 15) => {
+const API_KEY = '42598065-1779ad5a953180c3fe77c2809';
+const API_URL = 'https://pixabay.com/api/';
+const CONFIG = {
+  params: {
+    key: API_KEY,
+    image_type: 'photo',
+    orientations: 'horizontal',
+    safesearch: true,
+    page: 1,
+    per_page: 15,
+  },
+};
+
+export async function getGalleryData(queryValue, page) {
   try {
-    const response = await axios.get(
-      `${BASE_URL}?key=${API_KEY}&q=${encodeURIComponent(
-        searchValue
-      )}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`
-    );
-
+    fetchLoader();
+    CONFIG.params.q = queryValue;
+    CONFIG.params.page = page;
+    const response = await axios.get(API_URL, CONFIG);
     return response.data;
   } catch (error) {
-    console.error(error);
+    if (error.response) {
+      const { data } = error.response;
+      // The request was made, but the server responded with a non-2xx status code
+      showInfoMessage(
+        `${MESSAGES.exception} ERROR: ${data}`,
+        MESSAGES_BG_COLORS.orange
+      );
+    } else if (error.request) {
+      // The request was made, but no response was received
+      showInfoMessage(
+        `${MESSAGES.exception} ERROR: ${error.request}`,
+        MESSAGES_BG_COLORS.orange
+      );
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      showInfoMessage(
+        `${MESSAGES.exception} ERROR: ${error.message}`,
+        MESSAGES_BG_COLORS.orange
+      );
+    }
   }
-};
+}
